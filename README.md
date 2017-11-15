@@ -29,3 +29,6 @@ var movies = [
 ![level 1](https://cloud.githubusercontent.com/assets/7968370/26704460/0fb2e152-46e4-11e7-9873-8f88f94b1b75.png)
 ![level 1](https://cloud.githubusercontent.com/assets/7968370/26704486/48dd4b34-46e4-11e7-8c41-19ea1abc154f.png)
 ![level 1](https://cloud.githubusercontent.com/assets/7968370/26704478/3ddcc304-46e4-11e7-83c2-2c04de3baa5d.png)
+
+To open Kirk's starter branch, not the master, I cloned it then went to git checkout starter
+then when to the folder and typed subl . to open everything in sublime from the starter branch
