@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import Movie from './components/Movie.jsx'
-import Search from './components/Search.jsx'
-import AddMovie from './components/AddMovie.jsx'
+import Movie from './components/Movie.jsx';
+import Search from './components/Search.jsx';
+import AddMovie from './components/AddMovie.jsx';
+import $ from 'jquery';
 
 
 class MovieList extends React.Component {
@@ -10,25 +11,47 @@ class MovieList extends React.Component {
     super();
     
     this.state = {
-      movies: [
-        {title: 'Mean Girls'},
-        {title: 'Hackers'},
-        {title: 'The Grey'},
-        {title: 'Sunshine'},
-        {title: 'Ex Machina'},
-      ],
+      // movies: [
+      //   {title: 'Mean Girls'},
+      //   {title: 'Hackers'},
+      //   {title: 'The Grey'},
+      //   {title: 'Sunshine'},
+      //   {title: 'Ex Machina'},
+      // ],
       
-      filteredMovies: [
-        {title: 'Mean Girls'},
-        {title: 'Hackers'},
-        {title: 'The Grey'},
-        {title: 'Sunshine'},
-        {title: 'Ex Machina'},
-      ],
+      // filteredMovies: [
+      //   {title: 'Mean Girls'},
+      //   {title: 'Hackers'},
+      //   {title: 'The Grey'},
+      //   {title: 'Sunshine'},
+      //   {title: 'Ex Machina'},
+      // ],
+      
     }
     
     this.changeDisplayedMovies = this.changeDisplayedMovies.bind(this);
     this.addMovie = this.addMovie.bind(this);
+  }
+  
+  //ajax gets url, method, success and error
+  //ajax posts, 6 things, including the data
+  
+  //componentDidMount() is good place to init DOM nodes
+  componentDidMount() {
+    $.ajax({
+      method: 'GET',
+      url: '/movies',
+      success: function(movies) {
+        console.log(movies);
+        this.setState({
+          movies: movies,
+          filteredMovies: movies,
+        })
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    })
   }
   
   changeDisplayedMovies(filteredMoviesFromSearch) {
@@ -55,14 +78,14 @@ class MovieList extends React.Component {
   render() {
     return (
       <div>
+        <AddMovie class="input" addMovie={this.addMovie}/>
         
-        <AddMovie addMovie={this.addMovie}/>
-        
+        <br/><br/><br/>
         {this.state.filteredMovies.map((video, index) => {
           return <Movie video={video} key={index}/>
           
         })}
-        <Search movies={this.state.movies} changeDisplayedMovies={this.changeDisplayedMovies}/>
+        <Search class="input" movies={this.state.movies} changeDisplayedMovies={this.changeDisplayedMovies}/>
         
         
       </div>
@@ -81,3 +104,5 @@ ReactDOM.render( <MovieList />, document.getElementById('app'));
 //  Add a button to each list item that allows the user to toggle a 'watched' property.
 //  Add two buttons to allow the users to toggle between a list of 'watched' movies and movies 'to watch'.
 //  Add a panel of movie information that appears when the title is clicked (consider starting with hardcoded information)
+
+
