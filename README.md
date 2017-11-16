@@ -33,4 +33,7 @@ var movies = [
 To open Kirk's starter branch, not the master, I cloned it then went to git checkout starter
 then when to the folder and typed subl . to open everything in sublime from the starter branch
 
+Questions
+How to add loop to display a list of movies? Do I do the loop in the MovieList class? 
+
 
