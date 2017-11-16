@@ -5,15 +5,15 @@ class Movie extends React.Component {
     super(props);
     
   }
-  
-  
+
   render() {
     return (
-      <div>
-        {this.props.movie.title} 
-      </div>  
+      <div>{this.props.video.title}</div>  
     )
-  }
+    
+    }
+  
 }
 
 export default Movie;
+
