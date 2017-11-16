@@ -43,8 +43,8 @@ class MovieList extends React.Component {
     var copy1 = this.state.movies.slice(0);
     var copy2 = this.state.filteredMovies.slice(0);
     
-    copy1.push(movieToAdd);
-    copy2.push(movieToAdd);
+    copy1.push({title: movieToAdd});
+    copy2.push({title: movieToAdd});
     
     this.setState({
       movies: copy1,
