@@ -33,6 +33,4 @@ var movies = [
 To open Kirk's starter branch, not the master, I cloned it then went to git checkout starter
 then when to the folder and typed subl . to open everything in sublime from the starter branch
 
-wtf how do i save this
-sdkfjhsdk
-sdf
+
