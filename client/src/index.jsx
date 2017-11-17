@@ -11,22 +11,8 @@ class MovieList extends React.Component {
     super();
     
     this.state = {
-      // movies: [
-      //   {title: 'Mean Girls'},
-      //   {title: 'Hackers'},
-      //   {title: 'The Grey'},
-      //   {title: 'Sunshine'},
-      //   {title: 'Ex Machina'},
-      // ],
-      
-      // filteredMovies: [
-      //   {title: 'Mean Girls'},
-      //   {title: 'Hackers'},
-      //   {title: 'The Grey'},
-      //   {title: 'Sunshine'},
-      //   {title: 'Ex Machina'},
-      // ],
-      
+      movies: [],
+      filteredMovies: [],
     }
     
     this.changeDisplayedMovies = this.changeDisplayedMovies.bind(this);
@@ -34,23 +20,22 @@ class MovieList extends React.Component {
   }
   
   //ajax gets url, method, success and error
-  //ajax posts, 6 things, including the data
+  //ajax posts, 6 things, including the contentType: 'application/json' and data: JSON.stringify({title: movieToAdd})
   
   //componentDidMount() is good place to init DOM nodes
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: '/movies',
-      success: function(movies) {
-        console.log(movies);
+      url: '/movies', 
+      success: (movies) => {
         this.setState({
           movies: movies,
           filteredMovies: movies,
         })
       },
-      error: function(err) {
+      error: err => {
         console.log(err);
-      }
+      },
     })
   }
   
@@ -60,7 +45,19 @@ class MovieList extends React.Component {
   }
   
   addMovie(movieToAdd) {
-    console.log('Added movie', movieToAdd);
+    // console.log('Added movie', movieToAdd);
+    $.ajax({
+      method: 'POST',
+      url: '/movie',
+      data: JSON.stringify({title: movieToAdd}),
+      contentType: 'application/json',
+      success: movie => {
+        console.log('you got this back: ', movie);
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
     
     //add movieToAdd to both movides and filteredMovies
     var copy1 = this.state.movies.slice(0);
@@ -74,6 +71,8 @@ class MovieList extends React.Component {
       filteredMovies: copy2,
     })
   }
+  
+  //  Modify your index.jsx use the /movie POST route
   
   render() {
     return (
@@ -106,3 +105,37 @@ ReactDOM.render( <MovieList />, document.getElementById('app'));
 //  Add a panel of movie information that appears when the title is clicked (consider starting with hardcoded information)
 
 
+  // componentDidMount() {
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/movies',
+  //     success: (movies) => {
+  //       // console.log(movies);
+  //       this.setState({
+  //         movies: movies,
+  //         filteredMovies: movies,
+  //       })
+  //     },
+  //     error: function(err) {
+  //       console.log(err);
+  //     }
+  //   })
+  // }
+  
+  
+  
+    //   $.ajax({
+    //   method: 'POST',
+    //   url: '/movie',
+    //   data: JSON.stringify({title: movieToAdd}), //can I send this as a querystring? 
+    //   contentType: 'application/json',
+    //   success: (res) => {
+    //     console.log('Client side response: ', res);
+    //   },
+    //   error: err => {
+    //     console.log('Client side error', err);
+    //   },
+      
+    // })
+  
+  
